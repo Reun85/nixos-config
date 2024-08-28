@@ -1,0 +1,15 @@
+keybinding:
+  universal:
+    # return: "q"
+    quit-alt1: "<c-c>"
+    # quit: "Q"
+gui:
+  theme:
+    selectedLineBgColor:
+      - underline
+    selectedRangeBgColor:
+      - underline
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never

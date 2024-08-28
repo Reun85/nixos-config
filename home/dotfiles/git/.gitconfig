@@ -1,0 +1,20 @@
+[credential]
+	helper = store 
+[user]
+	name = Reun
+	email = gugigergo@gmail.com
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/env gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/env gh auth git-credential
+
+
+# Delta
+[core]
+  editor = nvim
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
