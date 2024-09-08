@@ -7,11 +7,13 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+userName ="reun";in
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
+    outputs.homeManagerModules
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
@@ -22,6 +24,8 @@
 ./ags.nix
 ./theme.nix
   ];
+
+config = {
 
   nixpkgs = {
     # You can add overlays here
@@ -48,31 +52,32 @@
     };
   };
 
-  home = rec {
-    username = "reun";
-    homeDirectory = "/home/${username}";
+_custom.programs.neovim={
+enable=true;
+configFolder = config.lib.file.mkOutOfStoreSymlink "${config._custom.globals.configDirectory}/home/dotfiles/nvim";
+};
+
+_custom.globals={
+    userName = userName;
+    homeDirectory = "/home/${userName}";
+    configDirectory = "/home/${userName}/all/nix-config";
+};
+  home =  {
+    username = userName;
+    homeDirectory = "/home/${userName}";
   };
 
 
-  # Add stuff for your user as you see fit:
-  home.packages = with pkgs;[ steam tidal-hifi delta neofetch kitty
-(pkgs.discord.override {withVencord=true;}) ];
+  home.packages = with pkgs;[ steam tidal-hifi delta neofetch kitty unzip
+vesktop discord];
 
 
-  # Enable home-manager and git
   programs.home-manager.enable = true;
 
-programs.neovim = {
-    enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-  };
 
 programs.git = {enable = true;
 userName = "Reun";
 userEmail = "gugigergo@gmail.com";
-
-
-
 };
 
 programs.git-credential-oauth.enable=true;
@@ -115,14 +120,11 @@ alias lf lfcd
 
 xdg.configFile."lf".source = ./dotfiles/lf;
 
-home.sessionVariables = { 
-        EDITOR = "nvim"; 
-        VISUAL = "nvim";
-        };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
+};
 }

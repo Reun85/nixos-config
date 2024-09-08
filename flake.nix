@@ -96,5 +96,7 @@ sddm-sugar-candy-nix = {
     inputs.nixpkgs.follows = "nixpkgs";
   };
 neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 }

@@ -7,11 +7,27 @@
   config,
   pkgs,
   ...
-}: 
+}: let 
+monitorConfig =  
+''Section "Monitor"
+Identifier "DP-1"
+Option "Primary" "true"
+EndSection
+Section "Screen"
+Identifier "Screen0"
+Monitor "DP-1"
+EndSection
+Section "Device"
+Identifier "Device0"
+Driver "modesetting"
+EndSection'';
+
+in
 {
   # You can import other NixOS modules here
   imports = [
 
+    outputs.nixosModules
       inputs.sddm-sugar-candy-nix.nixosModules.default
 inputs.lanzaboote.nixosModules.lanzaboote
 
@@ -29,6 +45,8 @@ inputs.lanzaboote.nixosModules.lanzaboote
     ./hardware-configuration.nix
   ];
 
+  config ={
+    #_custom.programs.nix-ld.enable=true;
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -79,10 +97,14 @@ inputs.lanzaboote.nixosModules.lanzaboote
   networking.hostName = "Nixos-PC";
 
 
-	# Enable the X11 windowing system.
-	# You can disable this if you're only using the Wayland session.
 	services.xserver = {
 enable = true;
+
+displayManager.sessionCommands = ''
+      xrandr --output DP-1 --primary
+    '';
+    
+
 };
 
 
@@ -231,7 +253,8 @@ systemd.user.services.mpris-proxy = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+ ripgrep fzf
+    vim
 wget curl btop ncdu lf
 git gnumake lazygit
 inputs.home-manager.packages.${pkgs.system}.default
@@ -249,16 +272,46 @@ environment.variables = {
 
 
 #nvidia stuff
+    
+# Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+  };
 
-hardware.opengl.enable=true;
-services.xserver.videoDrivers = ["nvidia"];
-hardware.nvidia = {
-modesetting.enable=true;
-#powerManagemenet.finegrained=false;
-open=false;
-nvidiaSettings=true;
-package=config.boot.kernelPackages.nvidiaPackages.stable;
-};
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+
+    # Modesetting is required.
+    modesetting.enable = true;
+
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Enable this if you have graphical corruption issues or application crashes after waking
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # of just the bare essentials.
+    powerManagement.enable = false;
+
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of 
+    # supported GPUs is at: 
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Only available from driver 515.43.04+
+    # Currently alpha-quality/buggy, so false is currently the recommended setting.
+    open = false;
+
+    # Enable the Nvidia settings menu,
+	# accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
 # Secure boot
   boot.loader.efi.canTouchEfiVariables = true;
@@ -302,4 +355,5 @@ pkiBundle = "/etc/secureboot";
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
+    };
 }
