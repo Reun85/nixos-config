@@ -127,6 +127,11 @@ config = {
 
   programs.yazi = {
     enable = true;
+      #plugins = {
+      #lazygit = 
+      #"https://github.com/Lil-Dank/lazygit.yazi";
+        
+      #};
   };
 
   xdg.configFile."yazi".source = ./dotfiles/yazi;
