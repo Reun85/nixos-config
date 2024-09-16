@@ -52,73 +52,87 @@ config = {
     };
   };
 
-_custom.programs.neovim={
-enable=true;
-configFolder = config.lib.file.mkOutOfStoreSymlink "${config._custom.globals.configDirectory}/home/dotfiles/nvim";
-};
+  _custom.programs.neovim={
+  enable=true;
+  configFolder = config.lib.file.mkOutOfStoreSymlink "${config._custom.globals.configDirectory}/home/dotfiles/nvim";
+  };
 
-_custom.globals={
-    userName = userName;
-    homeDirectory = "/home/${userName}";
-    configDirectory = "/home/${userName}/all/nix-config";
-};
+  _custom.globals={
+      userName = userName;
+      homeDirectory = "/home/${userName}";
+      configDirectory = "/home/${userName}/all/nix-config";
+  };
   home =  {
     username = userName;
     homeDirectory = "/home/${userName}";
   };
 
 
-  home.packages = with pkgs;[ steam tidal-hifi delta neofetch kitty unzip
-vesktop discord];
+  home.packages = with pkgs;[ steam tidal-hifi delta neofetch kitty unzip vesktop discord];
 
 
   programs.home-manager.enable = true;
 
 
-programs.git = {enable = true;
-userName = "Reun";
-userEmail = "gugigergo@gmail.com";
-};
+  programs.git = {enable = true;
+  userName = "Reun";
+  userEmail = "gugigergo@gmail.com";
+  };
 
-programs.git-credential-oauth.enable=true;
-
-
-xdg.configFile."neofetch".source = ./dotfiles/neofetch;
-
-programs.zathura.enable=true;
-xdg.configFile."zathura".source = ./dotfiles/zathura;
+  programs.git-credential-oauth.enable=true;
 
 
- programs.btop.enable=true;
-xdg.configFile."btop".source = ./dotfiles/btop;
+  xdg.configFile."neofetch".source = ./dotfiles/neofetch;
 
-programs.starship.enable=true;
-xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
+  programs.zathura.enable=true;
+  xdg.configFile."zathura".source = ./dotfiles/zathura;
 
-programs.wezterm.enable=true;
-xdg.configFile."wezterm".source = ./dotfiles/wezterm;
+
+  programs.btop.enable=true;
+  xdg.configFile."btop".source = ./dotfiles/btop;
+
+  programs.starship.enable=true;
+  xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
+
+  programs.wezterm.enable=true;
+  xdg.configFile."wezterm".source = ./dotfiles/wezterm;
 
 # Lazygit is installed for root even
-xdg.configFile."lazygit".source = ./dotfiles/lazygit;
+  xdg.configFile."lazygit".source = ./dotfiles/lazygit;
 
-xdg.configFile."ags".source = ./dotfiles/ags;
-xdg.configFile."hypr".source = ./dotfiles/hypr;
-
-
-programs.fish.enable=true;
-programs.fish.shellInit = 
-''
-# You may also like to assign a key (Ctrl-O) to this command:
-#     bind \co lfcd
-function lfcd
-    cd (command lf -print-last-dir "$argv")
-end
-alias lf lfcd
-'';
+  xdg.configFile."ags".source = ./dotfiles/ags;
+  xdg.configFile."hypr".source = ./dotfiles/hypr;
 
 
+  programs.fish.enable=true;
+  programs.fish.shellInit = 
+    ''
+    function yazi_cwd
+      set tmp (mktemp -t "yazi_cwd.XXXXXX")
+      command	yazi $argv --cwd-file="$tmp"
+      if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
+      end
+      rm -f -- "$tmp"
+    end
+    alias yazi yazi_cwd
+    '';
 
-xdg.configFile."lf".source = ./dotfiles/lf;
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+  };
+
+  programs.yazi = {
+    enable = true;
+  };
+
+  xdg.configFile."yazi".source = ./dotfiles/yazi;
+
+
+
 
 
   # Nicely reload system units when changing configs
