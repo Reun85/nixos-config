@@ -255,9 +255,10 @@ systemd.user.services.mpris-proxy = {
   environment.systemPackages = with pkgs; [
  ripgrep fzf
     vim
-wget curl btop ncdu lf
+wget curl btop ncdu
 git gnumake lazygit
 inputs.home-manager.packages.${pkgs.system}.default
+      nix-index
   ];
 
 environment.variables = { 
