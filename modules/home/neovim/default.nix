@@ -26,6 +26,10 @@ in {
         # required by telescope.nvim
         fd
         ripgrep
+      #markdown-toc
+        markdownlint-cli2
+        nixfmt-classic
+        nodePackages.prettier
       ];
 
       home.sessionVariables = {
