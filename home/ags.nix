@@ -1,21 +1,12 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}:{
-imports = [
-    inputs.ags.homeManagerModules.default
-  ];
+{ inputs, outputs, lib, config, pkgs, ... }: {
+  imports = [ inputs.ags.homeManagerModules.default ];
   home.packages = with pkgs; [
     bun
     dart-sass
     fd
     brightnessctl
     swww
-matugen
+    matugen
     slurp
     wf-recorder
     wl-clipboard
@@ -27,8 +18,7 @@ matugen
     gtk3
   ];
 
-  programs.ags = {
-    enable = true;
-  };
-xdg.configFile."ags".source = ./dotfiles/ags;
+  programs.ags = { enable = true; };
+  xdg.configFile."ags".source = ./dotfiles/ags;
+
 }

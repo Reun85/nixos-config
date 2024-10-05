@@ -133,11 +133,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722555600,
-        "narHash": "sha256-XOQkdLafnb/p9ij77byFQjDf5m5QYl9b2REiVClC+x4=",
+        "lastModified": 1726153070,
+        "narHash": "sha256-HO4zgY0ekfwO5bX0QH/3kJ/h4KvUDFZg8YpkNwIbg1U=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "8471fe90ad337a8074e957b69ca4d0089218391d",
+        "rev": "bcef6817a8b2aa20a5a6dbb19b43e63c5bf8619a",
         "type": "github"
       },
       "original": {
@@ -217,11 +217,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1724763886,
-        "narHash": "sha256-SzBtZs5z+YGM50oyt67R78qLhxG/wG5/SlVRsCF5kRc=",
+        "lastModified": 1726745158,
+        "narHash": "sha256-D5AegvGoEjt4rkKedmxlSEmC+nNLMBPWFxvmYnVLhjk=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "1cd12de659fab215624c630c37d1c62aa2b7824e",
+        "rev": "4e743a6920eab45e8ba0fbe49dc459f1423a4b74",
         "type": "github"
       },
       "original": {
@@ -283,11 +283,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719226092,
-        "narHash": "sha256-YNkUMcCUCpnULp40g+svYsaH1RbSEj6s4WdZY/SHe38=",
+        "lastModified": 1724947644,
+        "narHash": "sha256-MHHrHasTngp7EYQOObHJ1a/IsRF+wodHqOckhH6uZbk=",
         "owner": "hercules-ci",
         "repo": "hercules-ci-effects",
-        "rev": "11e4b8dc112e2f485d7c97e1cee77f9958f498f5",
+        "rev": "dba4367b9a9d9615456c430a6d6af716f6e84cef",
         "type": "github"
       },
       "original": {
@@ -389,11 +389,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1724829355,
-        "narHash": "sha256-KBe6W0hqS12rAuFDZ3/btPqfpiDFuFfkUcaJAIXX3Kw=",
+        "lastModified": 1727528434,
+        "narHash": "sha256-fzvvCB0hjPPq3BhawZxcHAxY+MQIgJp6fJoa7QN/Sfc=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "fe6d897d26becaf7a12ffce52ff2d5fd98575f1b",
+        "rev": "b0e07ef4637357f272a62e6bb7f5f4460766aade",
         "type": "github"
       },
       "original": {
@@ -405,11 +405,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1724782593,
-        "narHash": "sha256-7zbb/n/3yDSopS8jHEHLrLWGUGpfh6Nr20Mfb1UJZaM=",
+        "lastModified": 1727476305,
+        "narHash": "sha256-vwwFI1qM0vIBy4H3XrelrUk886+H0sJfWzEREmg2Hb8=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "dad55f5e763f3f2f436a2ae4f4bb1f6c6442bb45",
+        "rev": "0f067cd34d09b38f9aaf2e1732d825e89b573077",
         "type": "github"
       },
       "original": {
@@ -437,6 +437,22 @@
       "original": {
         "owner": "Mic92",
         "repo": "nix-ld",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1728056216,
+        "narHash": "sha256-IrO06gFUDTrTlIP3Sz+mRB6WUoO2YsgMtOD3zi0VEt0=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "b7ca02c7565fbf6d27ff20dd6dbd49c5b82eef28",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
         "type": "github"
       }
     },
@@ -506,11 +522,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1724748588,
-        "narHash": "sha256-NlpGA4+AIf1dKNq76ps90rxowlFXUsV9x7vK/mN37JM=",
+        "lastModified": 1727335715,
+        "narHash": "sha256-1uw3y94dA4l22LkqHRIsb7qr3rV5XdxQFqctINfx8Cc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a6292e34000dc93d43bccf78338770c1c5ec8a99",
+        "rev": "28b5b8af91ffd2623e995e20aee56510db49001a",
         "type": "github"
       },
       "original": {
@@ -572,6 +588,7 @@
         "matugen": "matugen",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-ld": "nix-ld",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "sddm-sugar-candy-nix": "sddm-sugar-candy-nix"
